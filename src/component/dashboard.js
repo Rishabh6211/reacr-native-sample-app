@@ -25,8 +25,8 @@ export default class DashboardComponent extends Component {
          
           <Icon 
                 name='add-circle'
-                
-                style={{fontSize: 50, marginLeft:200, bottom: 15, left: 30 }}             
+                onPress={() => Actions.add()}
+                style={{fontSize: 50, marginLeft:200, bottom: 1, left: 30 }}             
             />
             
           </View>
@@ -38,17 +38,23 @@ export default class DashboardComponent extends Component {
             title="rishabh"
             source={user}
             activeOpacity={0.7}
-           
+            
             />
             <Icon 
                 name='add-circle'
-                
+                onPress={() => Actions.add()}
                 style={{fontSize: 80, marginLeft:10, color:"white" }}             
             />
           </View>
             <View style={{flex:0.1,padding:10}}>
             <Text>Rishabh</Text>
             </View>
+          </View>
+          <View style={{flex:0.2}}>
+            <Icon 
+                name='checkmark'                
+                style={{fontSize: 80,  color:"steelblue",left: 270 }}             
+            />
           </View>
          
           
