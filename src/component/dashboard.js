@@ -2,7 +2,8 @@ import React,{Component} from "react";
 import {Actions} from 'react-native-router-flux'
 import {StyleSheet,View,Image,TouchableOpacity} from  'react-native';
 import { Icon, Container, Header, Content, Card, CardItem, Thumbnail, Text, Button, Left, Body, Right } from 'native-base';
-
+import {Avatar} from 'react-native-elements'
+import user from '../../user.jpg';
 import bgSrc from '../../room.png';
 export default class DashboardComponent extends Component {
 
@@ -25,10 +26,32 @@ export default class DashboardComponent extends Component {
           <Icon 
                 name='add-circle'
                 
-                style={{fontSize: 50, marginLeft:200, bottom: 20, left: 30 }}             
+                style={{fontSize: 50, marginLeft:200, bottom: 15, left: 30 }}             
             />
             
           </View>
+          <View style={styles.container3}>
+          <View style={{flex:.35,flexDirection:'row'}}>
+          <Avatar
+            large
+            rounded
+            title="rishabh"
+            source={user}
+            activeOpacity={0.7}
+           
+            />
+            <Icon 
+                name='add-circle'
+                
+                style={{fontSize: 80, marginLeft:10, color:"white" }}             
+            />
+          </View>
+            <View style={{flex:0.1,padding:10}}>
+            <Text>Rishabh</Text>
+            </View>
+          </View>
+         
+          
         </View>
         
       );
@@ -45,9 +68,13 @@ export default class DashboardComponent extends Component {
     },
     container2:{
         flex:0.1,
-        
         alignItems: 'center',
-      },
+    },
+    container3:{
+        padding:10,
+        flex:0.5,
+        flexDirection:'column'
+    },
     image:{
         width:null,
         height:150
