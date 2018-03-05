@@ -2,7 +2,7 @@ import React,{Component} from 'react';
 import {StyleSheet} from  'react-native';
 import {Stack,Scene,Router,ActionConst} from 'react-native-router-flux';
 import ProfileComponent from './profile';
-
+import DashboardComponent from './dashboard'
 const Route = () => {
 
 	return(
@@ -16,6 +16,11 @@ const Route = () => {
 			
         <Stack key="register"   >
 		<Scene key="profile" component={ProfileComponent}  title="Create a Profile" initial />
+          
+		</Stack>
+		
+		<Stack key="dashboard"   >
+		<Scene key="dashboard" component={DashboardComponent}  title="Create new Home" />
           
         </Stack>
        

@@ -1,4 +1,5 @@
 import React,{Component} from "react";
+import {Actions} from 'react-native-router-flux'
 import {StyleSheet,View,Image,TouchableOpacity} from  'react-native';
 import { Container, Header, Content, Card, CardItem, Thumbnail, Text, Button, Icon, Left, Body, Right } from 'native-base';
 import bgSrc from '../../room.jpg';
@@ -24,7 +25,7 @@ export default class HomeComponent extends Component {
             </CardItem>
             
     
-            <TouchableOpacity style={styles.item}>
+            <TouchableOpacity style={styles.item} onPress={() => Actions.dashboard()}>
                 <Text style={styles.text}>                  
                 {"\t\t\t\t\t\t\t"} Craete a Home {"\n"} <Text>i have room for new person</Text>                
                 </Text>               
