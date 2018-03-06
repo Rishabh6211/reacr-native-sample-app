@@ -1,15 +1,65 @@
 import React,{Component} from "react";
 import {Actions} from 'react-native-router-flux'
-import {StyleSheet,View,Image,TouchableOpacity} from  'react-native';
+import {StyleSheet,View,Image,TouchableOpacity,PixelRatio} from  'react-native';
 import { Badge,Icon, Container, Header, Content, Card, CardItem, Thumbnail, Text, Button, Left, Body, Right } from 'native-base';
 import {Avatar,SearchBar} from 'react-native-elements'
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
+import ImagePicker from "react-native-image-picker";
 import user from '../../user.png';
 import bgSrc from '../../room.png';
+
+const imagePickerOptions = {
+  title: "Select Avatar",
+  customButtons: [{ name: "fb", title: "Choose Photo from Facebook" }],
+  storageOptions: {
+    skipBackup: true,
+    path: "images"
+  }
+};
+
 export default class UserComponent extends Component {
 
+
+  state = {
+    avatarSource: null
+  };
+  selectPhotoTapped() {
+    const options = {
+      quality: 1.0,
+      maxWidth: 500,
+      maxHeight: 500,
+      storageOptions: {
+        skipBackup: true
+      }
+    };
+
+    ImagePicker.showImagePicker(imagePickerOptions, (response) => {
+      console.log('Response = ', response);
+
+      if (response.didCancel) {
+        console.log('User cancelled photo picker');
+      }
+      else if (response.error) {
+        console.log('ImagePicker Error: ', response.error);
+      }
+      else if (response.customButton) {
+        console.log('User tapped custom button: ', response.customButton);
+      }
+      else {
+        let source = { uri: response.uri };
+
+        // You can also display the image using data:
+        // let source = { uri: 'data:image/jpeg;base64,' + response.data };
+
+        this.setState({
+          avatarSource: source
+        });
+      }
+    });
+  }
     constructor(props) {
       super(props);
+      alert(JSON.stringify(ImagePicker));
       
     }
    
@@ -18,16 +68,15 @@ export default class UserComponent extends Component {
       return (
        
         <View style={styles.container}>
-            <View style={{padding:10,flex:0.4,alignItems:'center',top:20}}>
-                <Avatar
-                    xlarge
-                    rounded
-                    title="rishabh"
-                    source={user}
-                    activeOpacity={0.7}
-                
-                />         
-            </View>
+        <View style={{padding:10,flex:0.4,alignItems:'center',top:20}}>
+        <TouchableOpacity onPress={this.selectPhotoTapped.bind(this)}>
+          <View style={[styles.avatar, styles.avatarContainer, {marginBottom: 20}]}>
+          { this.state.avatarSource === null ? <Text>Select a Photo</Text> :
+            <Image style={styles.avatar} source={this.state.avatarSource} />
+          }
+          </View>
+        </TouchableOpacity>
+        </View>
             <View style={{flex:0.1,flexDirection:'row'}}>
                 <View style={{flex:0.5,alignItems:'center'}}><Text>Name</Text></View>
                 <View style={{flex:0.5,alignItems:'center'}}><Text>Age</Text></View>
@@ -85,5 +134,16 @@ export default class UserComponent extends Component {
     image:{
         width:null,
         height:150
+    },
+    avatarContainer: {
+      borderColor: '#9B9B9B',
+      borderWidth: 1 / PixelRatio.get(),
+      justifyContent: 'center',
+      alignItems: 'center'
+    },
+    avatar: {
+      borderRadius: 75,
+      width: 150,
+      height: 150
     }
   });
