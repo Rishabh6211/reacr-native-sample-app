@@ -1,21 +1,26 @@
 import React,{Component} from "react";
 import {Actions} from 'react-native-router-flux'
-import {StyleSheet,View,Image,TouchableOpacity} from  'react-native';
-import { Icon, Container, Header, Content, Card, CardItem, Thumbnail, Text, Button, Left, Body, Right } from 'native-base';
+import {FlatList,StyleSheet,View,Image,TouchableOpacity,TouchableHighlight} from  'react-native';
+import { Icon, Container, Header, Content, Card, CardItem, Thumbnail, Text, Button, Left, Body, Right,List,ListItem } from 'native-base';
 import {Avatar} from 'react-native-elements'
+import { connect } from 'react-redux';
 import user from '../../user.jpg';
 import bgSrc from '../../room.png';
-export default class DashboardComponent extends Component {
+import {Get_data} from '../actions/user'
+class DashboardComponent extends Component {
 
     constructor(props) {
       super(props);
-      
+      this.state = {
+        users: []
+      };     
+      this.props.getData();
     }
    
     render() {
-      
+      console.log("user",this.props.users.userlist)
       return (
-         
+        
         <View style={styles.container}>
           <View style={styles.container1}>
             <Image style={styles.image}source={bgSrc}>             
@@ -31,26 +36,29 @@ export default class DashboardComponent extends Component {
             
           </View>
           <View style={styles.container3}>
-          <View style={{flex:.35,flexDirection:'row'}}>
-          <Avatar
-            large
-            rounded
-            title="rishabh"
-            source={user}
-            activeOpacity={0.7}
+          <View style={{padding:10 ,flex:.5,flexDirection:'row'}}>
+          {
+            this.props.users.userlist?
+            <FlatList
+            numColumns={4}
+            scrollEnabled={false}
+            data={this.props.users.userlist}
+            keyExtractor={item => item.id}
+            renderItem={({item, index}) => {
+                console.log('in the list ',item)
+                return (
+                    //<Text> {item.name}</Text>
+                    <Avatar large rounded  onPress= {()=> Actions.add()} key ={item.id} source={{uri : item.picture}}/>
+                    
+                )
+            }}
+        />
+          : null
+          }
+          </View>
             
-            />
-            <Icon 
-                name='add-circle'
-                onPress={() => Actions.add()}
-                style={{fontSize: 80, marginLeft:10, color:"white" }}             
-            />
           </View>
-            <View style={{flex:0.1,padding:10}}>
-            <Text>Rishabh</Text>
-            </View>
-          </View>
-          <View style={{flex:0.2}}>
+          <View style={{flex:0.1}}>
             <Icon 
                 name='checkmark'                
                 style={{fontSize: 80,  color:"steelblue",left: 270 }}             
@@ -67,10 +75,11 @@ export default class DashboardComponent extends Component {
 
   const styles = StyleSheet.create({
     container:{
+      
       flex:1
     },
     container1:{
-      flex:0.3
+      flex:.2
     },
     container2:{
         flex:0.1,
@@ -86,3 +95,9 @@ export default class DashboardComponent extends Component {
         height:150
     }
   });
+
+  const mapStateToProps = (state) =>{
+    return {users:state.users? state.users : null }
+  }
+
+export default connect(mapStateToProps , {getData:Get_data})(DashboardComponent)

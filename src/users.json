@@ -1,0 +1,52 @@
+[
+  {
+    "_id": "5a9e35b1f6fe361250955f02",
+    "picture": "https://s3.amazonaws.com/uifaces/faces/twitter/brynn/128.jpg",
+    "age": 31,
+    "name": "Morrow Kent",
+    "gender": "male",
+    "company": "DANCERITY",
+    "email": "morrowkent@dancerity.com",
+    "phone": "+1 (845) 421-2814",
+    "address": "910 Krier Place, Camptown, Nevada, 6687",
+    "registered": "2015-11-09T01:30:52 -06:-30"
+  },
+  {
+    "_id": "5a9e35b1dd80fa60cec8c666",
+    "picture": "http://placehold.it/32x32",
+    "age": 34,
+    "name": "Buck Malone",
+    "gender": "male",
+    "company": "EXOTECHNO",
+    "email": "buckmalone@exotechno.com",
+    "phone": "+1 (884) 533-3084",
+    "address": "539 Mill Street, Mathews, Hawaii, 5334",
+    "registered": "2014-04-13T04:05:01 -06:-30"
+  },
+  {
+    "_id": "5a9e35b10e90b85e9b4d51bb",
+    "picture": "http://placehold.it/32x32",
+    "age": 33,
+    "name": "Sherman Callahan",
+    "gender": "male",
+    "company": "SLUMBERIA",
+    "email": "shermancallahan@slumberia.com",
+    "phone": "+1 (960) 480-3089",
+    "address": "491 Dewey Place, Riviera, Federated States Of Micronesia, 8696",
+    "registered": "2017-04-08T01:55:39 -06:-30"
+  },
+  {
+    "_id": "5a9e35b19bc43ab4a53c4b4b",
+    "picture": "http://placehold.it/32x32",
+    "age": 22,
+    "name": "Boone Craig",
+    "gender": "male",
+    "company": "SAVVY",
+    "email": "boonecraig@savvy.com",
+    "phone": "+1 (896) 407-2698",
+    "address": "266 Bartlett Place, Wanship, Maine, 8266",
+    "registered": "2014-05-20T02:25:31 -06:-30"
+  }
+  
+]
+ 

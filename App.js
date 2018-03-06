@@ -11,6 +11,7 @@ import {
   Text,
   View, ProgressBar, TextInput
 } from 'react-native';
+import allReducer from './src/reducers/index'
 import { Provider } from 'react-redux';
 import { createStore, applyMiddleware, compose } from 'redux';
 import thunk from 'redux-thunk'
@@ -30,7 +31,7 @@ const instructions = Platform.select({
 });
 
 
-const store = createStore(applyMiddleware(thunk));
+const store = createStore(allReducer,applyMiddleware(thunk));
 
 export default class App extends Component {
 
