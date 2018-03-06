@@ -36,7 +36,7 @@ class DashboardComponent extends Component {
             
           </View>
           <View style={styles.container3}>
-          <View style={{padding:10 ,flex:.5,flexDirection:'row'}}>
+          <View style={{flex:.6,flexDirection:'row'}}>
           {
             this.props.users.userlist?
             <FlatList

@@ -1,13 +1,14 @@
 import React,{Component} from "react";
 import {Actions} from 'react-native-router-flux'
-import {StyleSheet,View,Image,TouchableOpacity,PixelRatio} from  'react-native';
+import {connect} from 'react-redux';
+import {AsyncStorage,StyleSheet,View,Image,TouchableOpacity,PixelRatio,TextInput} from  'react-native';
 import { Badge,Icon, Container, Header, Content, Card, CardItem, Thumbnail, Text, Button, Left, Body, Right } from 'native-base';
 import {Avatar,SearchBar} from 'react-native-elements'
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 import ImagePicker from "react-native-image-picker";
 import user from '../../user.png';
 import bgSrc from '../../room.png';
-
+import {save_data} from '../actions/user'
 const imagePickerOptions = {
   title: "Select Avatar",
   customButtons: [{ name: "fb", title: "Choose Photo from Facebook" }],
@@ -17,12 +18,31 @@ const imagePickerOptions = {
   }
 };
 
-export default class UserComponent extends Component {
+class UserComponent extends Component {
 
 
   state = {
-    avatarSource: null
+    avatarSource: null,
+    name: '',
+    age: ''
   };
+  componentDidMount = () => AsyncStorage.getItem('name').then((value) => this.setState({ 'name': value }))
+
+  setName = (value) => {
+    AsyncStorage.setItem('name', value);
+    this.setState({ 'name': value });
+  }
+  handleUser = (text) => {
+    this.setState({ name: text })
+  }
+  handleAge = (number) => {
+    this.setState({ age: number })
+  }
+  add = (name, age) => {
+    alert('username: ' + name + ' age: ' + age)
+    this.props.save_data(name,age)
+    //this.props.login(username,pass)
+  }
   selectPhotoTapped() {
     const options = {
       quality: 1.0,
@@ -59,15 +79,15 @@ export default class UserComponent extends Component {
   }
     constructor(props) {
       super(props);
-      alert(JSON.stringify(ImagePicker));
+      
       
     }
    
     render() {
       
       return (
-       
-        <View style={styles.container}>
+       <KeyboardAwareScrollView style={styles.container}>
+        <View >
         <View style={{padding:10,flex:0.4,alignItems:'center',top:20}}>
         <TouchableOpacity onPress={this.selectPhotoTapped.bind(this)}>
           <View style={[styles.avatar, styles.avatarContainer, {marginBottom: 20}]}>
@@ -82,44 +102,35 @@ export default class UserComponent extends Component {
                 <View style={{flex:0.5,alignItems:'center'}}><Text>Age</Text></View>
             </View>
             <View style={{flex:0.1,flexDirection:'row',backgroundColor:'white'}}>
-                <View style={{flex:0.5,alignItems:'center',top:10}}><Text>Rishabh</Text></View>
-                <View style={{flex:0.5,alignItems:'center',top:10}}><Text>23</Text></View>
+               
+                <View style={{flex:0.5,alignItems:'center',top:10}}>  
+                <TextInput placeholder="Name"  onChangeText = {this.setName}
+                style={styles.input}/> 
+               
+                </View>
+                <View style={{flex:0.5,alignItems:'center',top:10}}>
+                <TextInput placeholder="Age"  onChangeText = {this.handleAge}
+                style={styles.input}/> 
+                </View>
             </View> 
-            <View style={{flex:0.1,flexDirection:'row',backgroundColor:'lightgray'}}>
-                <View style={{flex:0.5,alignItems:'center',top:10}}><Text>Tag</Text></View>
+            <View style={{padding:10,flex:0.1,flexDirection:'row',backgroundColor:'lightgray'}}>
+                <View style={{padding:10,flex:0.5,alignItems:'center',top:10}}><Text>Tag</Text></View>
                 
             </View>  
             <Icon name='add-circle' style={{fontSize: 50, color: 'steelblue', left:250,top:-25}} /> 
-            <View style={{padding:10,flex:0.2,flexDirection:'row'}} >
-               
-               
-                <Badge style={{ backgroundColor: 'steelblue' ,marginLeft:20}}>
-                <Text style={{ color: 'white' }}>Cooking  <Icon name='close-circle' style={{color:'white',fontSize: 20,marginLeft:10}} /></Text>
-                
-              </Badge>
-              
-              <Badge style={{ backgroundColor: 'steelblue', marginLeft:10 }}>
-              <Text style={{ color: 'white' }}>Music  <Icon name='close-circle' style={{color:'white',fontSize: 20,marginLeft:10}} /></Text>
-            </Badge>
-            <Badge style={{ backgroundColor: 'steelblue', marginLeft:10 }}>
-              <Text style={{ color: 'white' }}>Weekend  <Icon name='close-circle' style={{color:'white',fontSize: 20,marginLeft:10}} /></Text>
-            </Badge>
-            </View>
-            <View style={{flex:0.1,flexDirection:'row',bottom:40}} >
-               
-               
-                <Badge style={{ backgroundColor: 'steelblue' ,marginLeft:100}}>
-                <Text style={{ color: 'white' }}>Cooking  <Icon name='close-circle' style={{color:'white',fontSize: 20,marginLeft:10}} /></Text>
-              </Badge>
-              
-              <Badge style={{ backgroundColor: 'steelblue', marginLeft:10 }}>
-              <Text style={{ color: 'white' }}>Music  <Icon name='close-circle' style={{color:'white',fontSize: 20,marginLeft:10}} /></Text>
-            </Badge>
+            <View style={{padding:10,flex:0.2}}>
             
             </View>
-            
+            <View style={{padding:10,flex:0.1}}> 
+              <TouchableOpacity style={{backgroundColor:"steelblue"}} onPress = {
+                () => this.add(this.state.name, this.state.age)
+             }>
+                  <Text  style={{height:40,color:"white",top:10,marginLeft:150,fontWeight:'bold'}}>Add</Text>
+              </TouchableOpacity>
+            </View>
+            <Text>{this.state.name}</Text>
         </View>
-        
+        </KeyboardAwareScrollView>
         
       );
     }
@@ -145,5 +156,17 @@ export default class UserComponent extends Component {
       borderRadius: 75,
       width: 150,
       height: 150
+    },
+    input: {
+      
+      width:50,
+      //height: 40,
+     // marginHorizontal: 20,
+      //marginBottom :10,
+      color: 'black',
+    },
+    inputWrapper: {
+      flex: 1,
     }
   });
+  export default connect (null, {save_data:save_data})(UserComponent)

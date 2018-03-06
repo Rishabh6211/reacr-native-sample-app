@@ -8,3 +8,19 @@ export function Get_data(){
     }
 	
 }
+
+export function save_data(name,age){
+	let body = {
+		name:name,
+		age:age
+	}	
+	let array = UserData;
+	array.push(body)
+	return dispatch => {
+		dispatch({
+			type: 'GET_DATA',payload : array
+		});
+    }
+	
+}
+

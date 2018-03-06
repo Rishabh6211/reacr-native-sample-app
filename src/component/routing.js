@@ -5,6 +5,7 @@ import ProfileComponent from './profile';
 import DashboardComponent from './dashboard'
 import AddComponent from './addperson'
 import UserComponent from './newuser'
+import ListComponent from './listing'
 const Route = () => {
 
 	return(
@@ -25,6 +26,7 @@ const Route = () => {
 			<Scene key="dashboard" component={DashboardComponent}  title="Create new Home" />
 			<Scene key="add"  component={AddComponent}  title="Add new Person" />
 			<Scene key="user"  component={UserComponent}  title="Add new Person" />
+			<Scene key="listing"  component={ListComponent}  title="Users" />
         </Stack>
        
 		</Scene>

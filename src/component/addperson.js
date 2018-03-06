@@ -26,7 +26,7 @@ export default class AddComponent extends Component {
             </View>
             <View style={{flex:0.4, padding:10, flexDirection:'column',backgroundColor:"white"}}>
            
-                <Icon name='search' style={{fontSize: 120, color: 'gray', left:120,top:20}} />
+                <Icon onPress={() => Actions.listing()} name='search' style={{fontSize: 120, color: 'gray', left:120,top:20}} />
                 <View style={{padding:10, flex:0.1, alignItems: 'center'}}>
                     <Text>Search for new</Text>
                 </View>
