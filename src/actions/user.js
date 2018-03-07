@@ -9,10 +9,11 @@ export function Get_data(){
 	
 }
 
-export function save_data(name,age){
+export function save_data(name,age,uri){
 	let body = {
 		name:name,
-		age:age
+		age:age,
+		picture:uri
 	}	
 	let array = UserData;
 	array.push(body)

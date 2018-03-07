@@ -40,7 +40,7 @@ class UserComponent extends Component {
     this.setState({ age: number })
   }
   add = (name, age, uri) => {
-    alert('username: ' + name + ' age: ' + 'uri' + uri)
+    console.log("name",name,"uri",uri)
     this.props.save_data(name,age,uri)
     Actions.dashboard()
   }
@@ -115,12 +115,12 @@ class UserComponent extends Component {
             <View style={{flex:0.1,flexDirection:'row',backgroundColor:'white'}}>
                
                 <View style={{flex:0.5,alignItems:'center',top:10}}>  
-                <TextInput placeholder="Enter your Name"  onChangeText = {this.setName}
+                <TextInput placeholder="Enter Name"  onChangeText = {this.setName}
                 style={styles.input}/> 
                
                 </View>
                 <View style={{flex:0.5,alignItems:'center',top:10}}>
-                <TextInput placeholder="Enater your Age"  onChangeText = {this.handleAge}
+                <TextInput placeholder="Age"  onChangeText = {this.handleAge}
                 style={styles.input1}/> 
                 </View>
             </View> 
@@ -170,14 +170,14 @@ class UserComponent extends Component {
     },
     input: {
       
-      width:150,
+      width:100,
       //height: 40,
      // marginHorizontal: 20,
       //marginBottom :10,
       color: 'black',
     },
     input1:{
-      width:110,
+      width:35,
       color:'black'
     },
     inputWrapper: {
