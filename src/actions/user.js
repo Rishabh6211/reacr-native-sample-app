@@ -16,6 +16,7 @@ export function save_data(name,age){
 	}	
 	let array = UserData;
 	array.push(body)
+	console.log(array)
 	return dispatch => {
 		dispatch({
 			type: 'GET_DATA',payload : array

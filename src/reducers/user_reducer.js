@@ -6,6 +6,7 @@ export default function(state=[], action) {
                userlist : action.payload 
             } 
         break;
+        
     }
     return state;
 }

@@ -24,7 +24,8 @@ class UserComponent extends Component {
   state = {
     avatarSource: null,
     name: '',
-    age: ''
+    age: '',
+    uri:''
   };
   componentDidMount = () => AsyncStorage.getItem('name').then((value) => this.setState({ 'name': value }))
 
@@ -38,10 +39,20 @@ class UserComponent extends Component {
   handleAge = (number) => {
     this.setState({ age: number })
   }
-  add = (name, age) => {
-    alert('username: ' + name + ' age: ' + age)
-    this.props.save_data(name,age)
-    //this.props.login(username,pass)
+  add = (name, age, uri) => {
+    alert('username: ' + name + ' age: ' + 'uri' + uri)
+    this.props.save_data(name,age,uri)
+    Actions.dashboard()
+  }
+
+  componentWillReceiveProps(Props){
+    // if(this.props.user.userlist){
+    //   alert("added successfully")
+    //   Actions.dashboard()
+    // }
+    // else{
+    //   alert("invalid user")
+    // }
   }
   selectPhotoTapped() {
     const options = {
@@ -104,13 +115,13 @@ class UserComponent extends Component {
             <View style={{flex:0.1,flexDirection:'row',backgroundColor:'white'}}>
                
                 <View style={{flex:0.5,alignItems:'center',top:10}}>  
-                <TextInput placeholder="Name"  onChangeText = {this.setName}
+                <TextInput placeholder="Enter your Name"  onChangeText = {this.setName}
                 style={styles.input}/> 
                
                 </View>
                 <View style={{flex:0.5,alignItems:'center',top:10}}>
-                <TextInput placeholder="Age"  onChangeText = {this.handleAge}
-                style={styles.input}/> 
+                <TextInput placeholder="Enater your Age"  onChangeText = {this.handleAge}
+                style={styles.input1}/> 
                 </View>
             </View> 
             <View style={{padding:10,flex:0.1,flexDirection:'row',backgroundColor:'lightgray'}}>
@@ -123,7 +134,7 @@ class UserComponent extends Component {
             </View>
             <View style={{padding:10,flex:0.1}}> 
               <TouchableOpacity style={{backgroundColor:"steelblue"}} onPress = {
-                () => this.add(this.state.name, this.state.age)
+                () => this.add(this.state.name, this.state.age,this.state.avatarSource)
              }>
                   <Text  style={{height:40,color:"white",top:10,marginLeft:150,fontWeight:'bold'}}>Add</Text>
               </TouchableOpacity>
@@ -159,11 +170,15 @@ class UserComponent extends Component {
     },
     input: {
       
-      width:50,
+      width:150,
       //height: 40,
      // marginHorizontal: 20,
       //marginBottom :10,
       color: 'black',
+    },
+    input1:{
+      width:110,
+      color:'black'
     },
     inputWrapper: {
       flex: 1,

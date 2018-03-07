@@ -40,7 +40,7 @@ export default class AddComponent extends Component {
                 <Text>Add new person</Text>
             </View>
             </View>
-            <Icon name='add-circle' style={{fontSize: 50, color: 'steelblue', left:300,top:5}} />
+            <Icon name='add-circle' onPress={() => Actions.user()} style={{fontSize: 50, color: 'steelblue', left:300,top:5}} />
         </View>
         </KeyboardAwareScrollView>
         
